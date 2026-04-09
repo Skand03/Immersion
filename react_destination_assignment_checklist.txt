@@ -1,0 +1,121 @@
+REACT DESTINATION MANAGEMENT ASSESSMENT – IMPLEMENTATION GUIDE & CHECKLIST
+
+Purpose
+
+This document summarizes the assignment requirements, how the project
+should be implemented, and a checklist you can use to verify your code
+before submitting the project.
+
+Assignment Goal
+
+Build a React interface that allows an admin user to manage rural
+immersion destinations in the GAIA system.
+
+The interface must: • Allow creating destinations • Display all
+destinations • Update destinations • Delete destinations • Handle
+validation • Handle server errors • Include authorization header in API
+calls
+
+Required APIs
+
+1.  CREATE DESTINATION Method: POST Endpoint: /admin/create-destination
+
+Body: { name: string (required) description: string (required) meta:
+string (optional) }
+
+Success Response: { statusCode: 201, data: { destinationId: number } }
+
+2.  UPDATE DESTINATION Method: PUT Endpoint:
+    /admin/update-destination/{destinationId}
+
+Body: { name: string (optional) description: string (optional) }
+
+Success Response: { statusCode: 201, data: { destinationId: number } }
+
+3.  DELETE DESTINATION Method: DELETE Endpoint:
+    /admin/delete-destination/{destinationId}
+
+Success Response: Status Code: 204
+
+4.  GET ALL DESTINATIONS Method: GET Endpoint: /admin/destinations
+
+Query Parameters: page (default: 1) perPage (default: 10) name (search
+filter)
+
+Example Response: { statusCode: 200, data: { destinations: [ { id: 1,
+destinationName: “Ralegan Siddhi”, description: “Environmental village”,
+createdById: 101, createdBy: “John Doe” } ], metadata: { total: 45,
+page: 1, perPage: 10 } } }
+
+Important Requirement – Authorization Header
+
+Every API request must include:
+
+Authorization: Bearer {token}
+
+Recommended React Project Structure
+
+src/ ├── api/ │ destinationApi.js │ ├── components/ │
+DestinationForm.jsx │ DestinationList.jsx │ ├── App.js └── index.js
+
+Feature Implementation Plan
+
+STEP 1 – Build Form UI • Input: destination name • Textarea: description
+• Input: meta tags • Submit button
+
+STEP 2 – Manage Form State Use React useState to store form values.
+
+STEP 3 – CREATE Destination API Use axios POST request to send form
+data.
+
+STEP 4 – GET Destinations Use axios GET request and display results
+using map().
+
+STEP 5 – DELETE Destination Add delete button. Call DELETE API and
+update state using filter().
+
+STEP 6 – UPDATE Destination Add edit button. Load selected destination
+in form. Call PUT API to update record.
+
+STEP 7 – Form Validation Check: • name is required • description is
+required Show error messages before submitting.
+
+STEP 8 – Error Handling Use try/catch around API calls. Show alert or
+message if API fails.
+
+STEP 9 – Pagination (Optional improvement) Use query parameters:
+?page=1&perPage=10
+
+STEP 10 – Search Filter (Optional improvement) Allow searching by
+destination name.
+
+Checklist Before Submission
+
+CODE STRUCTURE ☐ API logic separated from UI ☐ Components organized
+properly ☐ Clean readable code
+
+FORM ☐ Form fields working ☐ Validation implemented ☐ Form resets after
+submit
+
+CRUD OPERATIONS ☐ Create destination works ☐ Get destinations works ☐
+Update destination works ☐ Delete destination works
+
+API ☐ Authorization header included ☐ Correct endpoints used ☐ Correct
+request body sent
+
+UI ☐ List renders correctly ☐ Buttons work properly ☐ No console errors
+
+ERROR HANDLING ☐ API errors handled ☐ User-friendly messages shown
+
+FINAL TEST
+
+Before submission verify:
+
+1.  Create new destination
+2.  View destination in list
+3.  Edit destination
+4.  Delete destination
+5.  No runtime errors
+6.  API requests include authorization token
+
+If all checks pass, the assignment should work correctly.
